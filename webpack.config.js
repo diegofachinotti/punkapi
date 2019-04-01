@@ -13,6 +13,14 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.styl$/,
+                loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
             }
         ]
     },
