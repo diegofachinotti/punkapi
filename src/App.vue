@@ -12,18 +12,27 @@
                 <td class="text-xs-right">{{ props.item.first_brewed }}</td>
                 <td class="text-xs-right">{{ props.item.abv }}</td>
             </template>
-
         </v-data-table>
 
-</v-app>
+    </v-app>
 </template>
 
 <script>
     export default {
         name: 'app',
+        mounted(){
+
+            // Use Axios to fetch the data
+            const axios = require("axios");
+            axios
+                .get('https://api.punkapi.com/v2/beers')
+                .then((response) => {
+                    // Hadle success
+                    this.beers = response.data;
+                });
+        },
         data () {
             return {
-                message: 'This is a test',
                 headers: [
                     {
                         text: 'Image',
@@ -41,53 +50,7 @@
                     { text: 'First brewed', align: 'right', value: 'first_brewed' },
                     { text: 'ABV', align: 'right', value: 'abv' }
                 ],
-                beers: [
-                    {
-                        id: 192,
-                        name: "Punk IPA 2007 - 2010",
-                        tagline: "Post Modern Classic. Spiky. Tropical. Hoppy.",
-                        first_brewed: "04/2007",
-                        description: "Our flagship beer that kick started the craft beer revolution. This is James and Martin's original take on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.",
-                        image_url: "https://images.punkapi.com/v2/192.png",
-                        abv: 6.0,
-                    },
-                    {
-                        id: 194,
-                        name: "Punk IPA 2007 - 2010",
-                        tagline: "Post Modern Classic. Spiky. Tropical. Hoppy.",
-                        first_brewed: "04/2007",
-                        description: "Our flagship beer that kick started the craft beer revolution. This is James and Martin's original take on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.",
-                        image_url: "https://images.punkapi.com/v2/194.png",
-                        abv: 6.0,
-                    },
-                    {
-                        id: 195,
-                        name: "Punk IPA 2007 - 2010",
-                        tagline: "Post Modern Classic. Spiky. Tropical. Hoppy.",
-                        first_brewed: "04/2007",
-                        description: "Our flagship beer that kick started the craft beer revolution. This is James and Martin's original take on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.",
-                        image_url: "https://images.punkapi.com/v2/195.png",
-                        abv: 6.0,
-                    },
-                    {
-                        id: 196,
-                        name: "Punk IPA 2007 - 2010",
-                        tagline: "Post Modern Classic. Spiky. Tropical. Hoppy.",
-                        first_brewed: "04/2007",
-                        description: "Our flagship beer that kick started the craft beer revolution. This is James and Martin's original take on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.",
-                        image_url: "https://images.punkapi.com/v2/196.png",
-                        abv: 6.0,
-                    },,
-                    {
-                        id: 197,
-                        name: "Punk IPA 2007 - 2010",
-                        tagline: "Post Modern Classic. Spiky. Tropical. Hoppy.",
-                        first_brewed: "04/2007",
-                        description: "Our flagship beer that kick started the craft beer revolution. This is James and Martin's original take on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.",
-                        image_url: "https://images.punkapi.com/v2/197.png",
-                        abv: 6.0,
-                    },
-                ]
+                beers: []
             }
         }
     };
